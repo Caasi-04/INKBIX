@@ -1,4 +1,4 @@
-// Datos de ejemplo (reemplazar por datos reales / API cuando esté disponible)
+// Datos de ejemplo — reemplaza por tu fuente real si corresponde
 const products = [
   { id:1, title:"Camiseta personalizada - Sunset", price:18.99, rating:4.6, img:"https://picsum.photos/seed/1/600/400", desc:"100% algodón, sublimada a color."},
   { id:2, title:"Taza mágica 330ml", price:9.5, rating:4.3, img:"https://picsum.photos/seed/2/600/400", desc:"Revelado con calor, apta para lavavajillas."},
@@ -16,43 +16,48 @@ const modalClose = document.getElementById("modal-close");
 
 function formatPrice(p){ return "S/ " + p.toFixed(2); }
 
+// Renderiza tarjetas sencillas sin añadir estilos nuevos (usa el Style.css existente)
 function render(list){
-  grid.innerHTML = list.map(p => {
-    return `
-      <article class="card" data-id="${p.id}">
-        <img src="${p.img}" alt="${p.title}" class="card-img">
-        <h3 class="card-title">${p.title}</h3>
-        <div class="card-meta">⭐ ${p.rating} · <span class="card-price">${formatPrice(p.price)}</span></div>
-        <p class="card-desc">${p.desc}</p>
-        <div class="card-actions">
-          <button class="btn view" data-action="view" data-id="${p.id}">Ver</button>
-          <button class="btn add" data-action="add" data-id="${p.id}">Agregar</button>
+  grid.innerHTML = list.map(p => `
+    <article class="producto" data-id="${p.id}">
+      <div class="producto-img">
+        <img src="${p.img}" alt="${p.title}">
+      </div>
+      <div class="producto-body">
+        <h3 class="producto-titulo">${p.title}</h3>
+        <div class="producto-meta">⭐ ${p.rating} · <span class="producto-precio">${formatPrice(p.price)}</span></div>
+        <p class="producto-desc">${p.desc}</p>
+        <div class="producto-acciones">
+          <button class="btn ver" data-action="view" data-id="${p.id}">Ver</button>
+          <button class="btn agregar" data-action="add" data-id="${p.id}">Agregar</button>
         </div>
-      </article>
-    `;
-  }).join("");
+      </div>
+    </article>
+  `).join("");
 }
 
 function openModal(product){
   modalBody.innerHTML = `
-    <div class="modal-grid">
-      <img src="${product.img}" alt="${product.title}" class="modal-img">
-      <div class="modal-info">
+    <div class="modal-detalle">
+      <img src="${product.img}" alt="${product.title}">
+      <div>
         <h2>${product.title}</h2>
-        <p class="muted">⭐ ${product.rating}</p>
-        <p class="price">${formatPrice(product.price)}</p>
-        <p class="desc">${product.desc}</p>
+        <p>⭐ ${product.rating}</p>
+        <p class="producto-precio">${formatPrice(product.price)}</p>
+        <p>${product.desc}</p>
         <div style="margin-top:12px">
-          <button class="btn primary">Comprar ahora</button>
-          <button class="btn" id="modal-add">Agregar al carrito</button>
+          <button class="btn">Comprar ahora</button>
+          <button class="btn">Agregar al carrito</button>
         </div>
       </div>
     </div>
   `;
+  // Mostrar modal; si tu Style.css usa otros selectores para modal, ajusta aquí a lo que tenga tu CSS
+  modal.style.display = "block";
   modal.setAttribute("aria-hidden","false");
 }
 
-function closeModal(){ modal.setAttribute("aria-hidden","true"); modalBody.innerHTML=""; }
+function closeModal(){ modal.style.display = "none"; modal.setAttribute("aria-hidden","true"); modalBody.innerHTML = ""; }
 
 grid.addEventListener("click", (e)=>{
   const btn = e.target.closest("button");
@@ -65,21 +70,21 @@ grid.addEventListener("click", (e)=>{
   if(action === "add") alert(`Producto agregado: ${p.title}`);
 });
 
-modalClose.addEventListener("click", closeModal);
+if(modalClose) modalClose.addEventListener("click", closeModal);
 modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
 
 function applyFilters(){
-  let q = search.value.trim().toLowerCase();
+  const q = (search.value || "").trim().toLowerCase();
   let list = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
   if(sort.value === "price-asc") list.sort((a,b)=>a.price-b.price);
   if(sort.value === "price-desc") list.sort((a,b)=>b.price-a.price);
   render(list);
 }
 
-search.addEventListener("input", debounce(applyFilters, 180));
+search.addEventListener("input", debounce(applyFilters, 160));
 sort.addEventListener("change", applyFilters);
 
 function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; }
 
-// inicial
+// Inicial
 render(products);
