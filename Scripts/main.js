@@ -2,12 +2,18 @@
 async function loadIncludes(){
   const includes = Array.from(document.querySelectorAll('[data-include]'));
   await Promise.all(includes.map(async el => {
-    const url = el.getAttribute('data-include');
+    let url = el.getAttribute('data-include') || '';
     try {
+      // Normaliza la URL para que apunte siempre al root del deploy
+      // Si ya es absoluta (empieza por http o /) la usamos tal cual.
+      if(!/^(\w+:)?\/\//.test(url) && !url.startsWith('/')){
+        // Elimina "./" prefijo y convierte a ruta desde la raíz
+        url = '/' + url.replace(/^(\.\/)+/, '');
+      }
       const res = await fetch(url);
       if(!res.ok) throw new Error(`No se pudo cargar ${url} (${res.status})`);
       el.innerHTML = await res.text();
-      // ejecutar scripts dentro del include
+      // ejecutar scripts dentro del include si los hubiera
       el.querySelectorAll('script').forEach(old => {
         const s = document.createElement('script');
         if(old.src) s.src = old.src;
