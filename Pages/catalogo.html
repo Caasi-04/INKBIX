@@ -34,17 +34,18 @@
   </footer>
 
   <script>
-    // Ruta: /data/products.json (ajusta si la colocaste en otra carpeta)
+    // Ruta: ../data/products.json (ajusta si la colocaste en otra carpeta)
     async function loadProducts() {
       try {
-        const res = await fetch('/data/products.json');
-        if (!res.ok) throw new Error('No se pudo cargar products.json');
+        // usar ruta relativa desde Pages/
+        const res = await fetch('../data/products.json');
+        if (!res.ok) throw new Error('No se pudo cargar products.json — status: ' + res.status);
         const json = await res.json();
         renderProducts(json.products || []);
       } catch (err) {
         console.error(err);
         document.getElementById('products-grid').innerHTML =
-          '<p class="error">Error cargando el catálogo. Intenta recargar la página.</p>';
+          '<p class="error">Error cargando el catálogo. Asegúrate de ejecutar un servidor local y de que ../data/products.json exista. ' + escapeHtml(err.message) + '</p>';
       }
     }
 
