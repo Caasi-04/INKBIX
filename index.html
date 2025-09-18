@@ -3,30 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mi Empresa de patos</title>
+  <title>InkBIX — Inicio</title>
   <link rel="stylesheet" href="Styles/Style.css">
-  <link rel="icon" href="/Images/Logos/Logo2.png" type="image/png">
+  <link rel="icon" href="Images/Logos/Logo2.png" type="image/png">
 </head>
 <body>
   <div data-include="components/header.html"></div>
 
   <nav>
-    <a href="index.html">Inicio</a>
-    <a href="Pages/catalogo.html">Catálogo</a>
-    <a href="Pages/personalizar.html">Personaliza</a>
-    <a href="Pages/nosotros.html">Sobre Nosotros</a>
-    <a href="Pages/contacto.html">Contacto</a>
+    <div class="wrapper">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="personalizar.html">Personaliza</a>
+      <a href="about.html">Sobre Nosotros</a>
+      <a href="contact.html">Contacto</a>
+    </div>
   </nav>
 
   <main class="container">
+    <!-- HERO mejorado: texto + imagen/visual -->
     <section class="section hero">
-      <h1>Bienvenido a InkBIX</h1>
-      <p>Impresión personalizada de alta calidad. Explora nuestro catálogo o crea tu propio diseño.</p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Impresión personalizada, calidad profesional</h1>
+          <p>Diseños únicos, producción rápida y acabados premium. Empieza ahora y crea algo memorable.</p>
+          <div style="margin-top:16px">
+            <a class="btn btn-primary" href="catalogo.html">Ver catálogo</a>
+            <a class="btn" href="personalizar.html" style="margin-left:8px">Personaliza tu diseño</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <img src="Images/hero-placeholder.png" alt="Muestra de producto" />
+        </div>
+      </div>
     </section>
 
     <section class="section">
-      <h2>Destacados</h2>
-      <p>Productos destacados y promociones.</p>
+      <h2 style="margin-bottom:12px">Destacados</h2>
+      <div class="cards">
+        <article class="card">
+          <img src="Images/products/p1.png" alt="" />
+          <h3>Producto A</h3>
+          <p class="muted">Sublimación sobre taza — impresión resistente.</p>
+        </article>
+        <article class="card">
+          <img src="Images/products/p2.png" alt="" />
+          <h3>Producto B</h3>
+          <p class="muted">Camisetas personalizadas — tejidos premium.</p>
+        </article>
+        <article class="card">
+          <img src="Images/products/p3.png" alt="" />
+          <h3>Producto C</h3>
+          <p class="muted">Vinilos y stickers — corte preciso.</p>
+        </article>
+      </div>
     </section>
   </main>
 
