@@ -16,21 +16,16 @@ const modalClose = document.getElementById("modal-close");
 
 function formatPrice(p){ return "S/ " + p.toFixed(2); }
 
-// Renderiza tarjetas sencillas sin añadir estilos nuevos (usa el Style.css existente)
 function render(list){
   grid.innerHTML = list.map(p => `
-    <article class="producto" data-id="${p.id}">
-      <div class="producto-img">
-        <img src="${p.img}" alt="${p.title}">
-      </div>
-      <div class="producto-body">
-        <h3 class="producto-titulo">${p.title}</h3>
-        <div class="producto-meta">⭐ ${p.rating} · <span class="producto-precio">${formatPrice(p.price)}</span></div>
-        <p class="producto-desc">${p.desc}</p>
-        <div class="producto-acciones">
-          <button class="btn ver" data-action="view" data-id="${p.id}">Ver</button>
-          <button class="btn agregar" data-action="add" data-id="${p.id}">Agregar</button>
-        </div>
+    <article class="card" role="article" data-id="${p.id}">
+      <img src="${p.img}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <div class="meta">⭐ ${p.rating} · <span class="price">${formatPrice(p.price)}</span></div>
+      <p class="desc" style="color:var(--muted);font-size:13px">${p.desc}</p>
+      <div class="actions">
+        <button class="btn ghost" data-action="view" data-id="${p.id}">Ver</button>
+        <button class="btn primary" data-action="add" data-id="${p.id}">Agregar</button>
       </div>
     </article>
   `).join("");
@@ -38,26 +33,22 @@ function render(list){
 
 function openModal(product){
   modalBody.innerHTML = `
-    <div class="modal-detalle">
-      <img src="${product.img}" alt="${product.title}">
-      <div>
-        <h2>${product.title}</h2>
-        <p>⭐ ${product.rating}</p>
-        <p class="producto-precio">${formatPrice(product.price)}</p>
-        <p>${product.desc}</p>
-        <div style="margin-top:12px">
-          <button class="btn">Comprar ahora</button>
-          <button class="btn">Agregar al carrito</button>
-        </div>
+    <img src="${product.img}" alt="${product.title}">
+    <div>
+      <h2>${product.title}</h2>
+      <p style="color:var(--muted)">⭐ ${product.rating}</p>
+      <p style="font-weight:600">${formatPrice(product.price)}</p>
+      <p style="margin-top:12px">${product.desc}</p>
+      <div style="margin-top:14px">
+        <button class="btn primary">Comprar ahora</button>
+        <button class="btn ghost" id="modal-add">Agregar al carrito</button>
       </div>
     </div>
   `;
-  // Mostrar modal; si tu Style.css usa otros selectores para modal, ajusta aquí a lo que tenga tu CSS
-  modal.style.display = "block";
   modal.setAttribute("aria-hidden","false");
 }
 
-function closeModal(){ modal.style.display = "none"; modal.setAttribute("aria-hidden","true"); modalBody.innerHTML = ""; }
+function closeModal(){ modal.setAttribute("aria-hidden","true"); modalBody.innerHTML=""; }
 
 grid.addEventListener("click", (e)=>{
   const btn = e.target.closest("button");
@@ -65,26 +56,25 @@ grid.addEventListener("click", (e)=>{
   const id = Number(btn.dataset.id);
   const action = btn.dataset.action;
   const p = products.find(x=>x.id===id);
-  if(!p) return;
   if(action === "view") openModal(p);
   if(action === "add") alert(`Producto agregado: ${p.title}`);
 });
 
-if(modalClose) modalClose.addEventListener("click", closeModal);
+modalClose.addEventListener("click", closeModal);
 modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
 
 function applyFilters(){
-  const q = (search.value || "").trim().toLowerCase();
+  let q = search.value.trim().toLowerCase();
   let list = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
   if(sort.value === "price-asc") list.sort((a,b)=>a.price-b.price);
   if(sort.value === "price-desc") list.sort((a,b)=>b.price-a.price);
   render(list);
 }
 
-search.addEventListener("input", debounce(applyFilters, 160));
+search.addEventListener("input", debounce(applyFilters, 180));
 sort.addEventListener("change", applyFilters);
 
 function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; }
 
-// Inicial
+// inicial
 render(products);

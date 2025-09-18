@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catálogo - InkBIX</title>
-  <!-- Usa el CSS original del proyecto -->
-  <link rel="stylesheet" href="../Styles/Style.css" />
+  <link rel="stylesheet" href="../Styles/catalog.css" />
 </head>
 <body>
-
   <header>
     <h1>InkBIX</h1>
     <p>Catálogo</p>
@@ -22,8 +20,8 @@
     <a href="/Pages/contacto.html">Contacto</a>
   </nav>
 
-  <main>
-    <section class="controls" style="display:flex;gap:8px;align-items:center;margin:16px 0;">
+  <main class="container">
+    <section class="controls">
       <input id="search" type="search" placeholder="Buscar productos..." />
       <select id="sort">
         <option value="relevance">Relevancia</option>
@@ -32,13 +30,13 @@
       </select>
     </section>
 
-    <section id="product-grid" class="catalog-grid" aria-live="polite">
-      <!-- Productos renderizados por Scripts/catalog.js -->
+    <section id="product-grid" class="product-grid" aria-live="polite">
+      <!-- Productos renderizados por JS -->
     </section>
   </main>
 
-  <!-- Modal simple (sin estilos nuevos, dependerá del CSS existente) -->
-  <div id="product-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none;">
+  <!-- Modal detalle -->
+  <div id="product-modal" class="modal" aria-hidden="true">
     <div class="modal-content">
       <button id="modal-close" class="modal-close" aria-label="Cerrar">&times;</button>
       <div id="modal-body"></div>
