@@ -1,3 +1,4 @@
+// Datos de ejemplo (reemplazar por datos reales / API cuando esté disponible)
 const products = [
   { id:1, title:"Camiseta personalizada - Sunset", price:18.99, rating:4.6, img:"https://picsum.photos/seed/1/600/400", desc:"100% algodón, sublimada a color."},
   { id:2, title:"Taza mágica 330ml", price:9.5, rating:4.3, img:"https://picsum.photos/seed/2/600/400", desc:"Revelado con calor, apta para lavavajillas."},
@@ -16,31 +17,35 @@ const modalClose = document.getElementById("modal-close");
 function formatPrice(p){ return "S/ " + p.toFixed(2); }
 
 function render(list){
-  grid.innerHTML = list.map(p => `
-    <article class="card" role="article" data-id="${p.id}">
-      <img src="${p.img}" alt="${p.title}">
-      <h3>${p.title}</h3>
-      <div class="meta">⭐ ${p.rating} · <span class="price">${formatPrice(p.price)}</span></div>
-      <p class="desc" style="color:var(--muted);font-size:13px">${p.desc}</p>
-      <div class="actions">
-        <button class="btn ghost" data-action="view" data-id="${p.id}">Ver</button>
-        <button class="btn primary" data-action="add" data-id="${p.id}">Agregar</button>
-      </div>
-    </article>
-  `).join("");
+  grid.innerHTML = list.map(p => {
+    return `
+      <article class="card" data-id="${p.id}">
+        <img src="${p.img}" alt="${p.title}" class="card-img">
+        <h3 class="card-title">${p.title}</h3>
+        <div class="card-meta">⭐ ${p.rating} · <span class="card-price">${formatPrice(p.price)}</span></div>
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-actions">
+          <button class="btn view" data-action="view" data-id="${p.id}">Ver</button>
+          <button class="btn add" data-action="add" data-id="${p.id}">Agregar</button>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
 function openModal(product){
   modalBody.innerHTML = `
-    <img src="${product.img}" alt="${product.title}">
-    <div>
-      <h2>${product.title}</h2>
-      <p style="color:var(--muted)">⭐ ${product.rating}</p>
-      <p style="font-weight:600">${formatPrice(product.price)}</p>
-      <p style="margin-top:12px">${product.desc}</p>
-      <div style="margin-top:14px">
-        <button class="btn primary">Comprar ahora</button>
-        <button class="btn ghost" id="modal-add">Agregar al carrito</button>
+    <div class="modal-grid">
+      <img src="${product.img}" alt="${product.title}" class="modal-img">
+      <div class="modal-info">
+        <h2>${product.title}</h2>
+        <p class="muted">⭐ ${product.rating}</p>
+        <p class="price">${formatPrice(product.price)}</p>
+        <p class="desc">${product.desc}</p>
+        <div style="margin-top:12px">
+          <button class="btn primary">Comprar ahora</button>
+          <button class="btn" id="modal-add">Agregar al carrito</button>
+        </div>
       </div>
     </div>
   `;
@@ -55,6 +60,7 @@ grid.addEventListener("click", (e)=>{
   const id = Number(btn.dataset.id);
   const action = btn.dataset.action;
   const p = products.find(x=>x.id===id);
+  if(!p) return;
   if(action === "view") openModal(p);
   if(action === "add") alert(`Producto agregado: ${p.title}`);
 });
