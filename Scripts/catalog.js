@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fragment = document.createDocumentFragment();
 
     products.forEach(p => {
+      // Ahora el producto es un enlace completo (clickable) que envía a personalizar con id
+      const link = document.createElement('a');
+      link.className = 'product-link';
+      link.href = `../Pages/personalizar.html?id=${encodeURIComponent(p.id || '')}`;
+      link.setAttribute('aria-label', p.name || 'Ver producto');
+
       const card = document.createElement('article');
       card.className = 'product-card';
 
@@ -23,46 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'product-image';
       img.alt = p.name || 'Producto';
 
-      // Nuevo: intentar varias rutas antes de fallback
-      (function setImageWithFallback(imgEl, src) {
-        const placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-          '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
-          '<rect fill="#eee" width="100%" height="100%"/>' +
-          '<text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#999" dy=".3em">Sin imagen</text>' +
-          '</svg>'
-        );
+      // Ruta fallback / placeholder (mantener tu lógica de intentos si quieres)
+      const placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
+        '<rect fill="#f5f5f5" width="100%" height="100%"/>' +
+        '<text x="50%" y="50%" font-size="18" text-anchor="middle" fill="#bbb" dy=".3em">Sin imagen</text>' +
+        '</svg>'
+      );
+      img.src = p.image || placeholder;
+      img.onerror = () => { img.onerror = null; img.src = placeholder; };
 
-        if (!src) {
-          imgEl.src = placeholder;
-          return;
-        }
-
-        const candidates = [
-          src,
-          src.replace(/^\.?\//, ''),           // sin ./ o /
-          '../' + src.replace(/^\.?\//, ''),   // relativa desde Pages
-          '/'+ src.replace(/^\.?\//, ''),      // desde raíz
-          'data/' + src.replace(/^\.?\//, ''), // posible carpeta data
-          'Images/' + src.replace(/^\.?\//, ''),// posible carpeta Images
-        ].filter((v, i, a) => v && a.indexOf(v) === i);
-
-        let idx = 0;
-        function tryNext() {
-          if (idx >= candidates.length) {
-            imgEl.src = placeholder;
-            return;
-          }
-          imgEl.onerror = () => {
-            idx++;
-            tryNext();
-          };
-          imgEl.onload = () => {
-            imgEl.onerror = null;
-          };
-          imgEl.src = candidates[idx];
-        }
-        tryNext();
-      })(img, p.image);
+      const body = document.createElement('div');
+      body.className = 'product-body';
 
       const name = document.createElement('h3');
       name.className = 'product-name';
@@ -82,13 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
         tags.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join(' ');
       }
 
-      card.appendChild(img);
-      card.appendChild(name);
-      card.appendChild(price);
-      card.appendChild(desc);
-      card.appendChild(tags);
+      // botón visible dentro de la card para que el usuario identifique dónde pulsar (opcional)
+      const cta = document.createElement('span');
+      cta.className = 'product-cta';
+      cta.textContent = 'Ver / Personalizar';
 
-      fragment.appendChild(card);
+      body.appendChild(name);
+      body.appendChild(price);
+      body.appendChild(desc);
+      body.appendChild(tags);
+      body.appendChild(cta);
+
+      card.appendChild(img);
+      card.appendChild(body);
+
+      link.appendChild(card);
+      fragment.appendChild(link);
     });
     grid.appendChild(fragment);
   };
