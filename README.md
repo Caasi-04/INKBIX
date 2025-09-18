@@ -1,38 +1,46 @@
-# InkBIX Project
+# InkBIX Catalog Project
 
-## Descripción
-InkBIX es una empresa dedicada a la sublimación, ofreciendo una variedad de productos personalizables. Este proyecto consiste en un sitio web que presenta la empresa, su catálogo de productos y opciones de personalización.
+## Overview
+The InkBIX Catalog project is a web application designed for a sublimation company. It allows users to explore a variety of customizable products, including mugs, shirts, thermoses, and jewelry. The application features a product catalog that dynamically loads items from a JSON file and includes a search functionality to help users find products by name or tag.
 
-## Estructura del Proyecto
-El proyecto tiene la siguiente estructura de archivos:
-
+## Project Structure
 ```
-InkBIX
-├── index.html              # Página principal del sitio web
-├── Pages                   # Carpeta que contiene las páginas adicionales
-│   ├── catalogo.html      # Página del catálogo de productos
-│   ├── personalizar.html   # Página para personalizar productos
-│   ├── nosotros.html       # Página "Sobre Nosotros"
-│   └── contacto.html       # Página de contacto
-├── Styles                  # Carpeta que contiene los estilos CSS
-│   └── Style.css           # Archivo CSS para el estilo del sitio
-├── components              # Carpeta que contiene componentes reutilizables
-│   ├── header.html         # Componente de encabezado
-│   └── footer.html         # Componente de pie de página
-├── vercel.json             # Configuración para el despliegue en Vercel
-├── package.json            # Configuración de npm para dependencias y scripts
-├── .gitignore              # Archivos y carpetas que Git debe ignorar
-└── README.md               # Documentación del proyecto
+inkbix-catalog
+├── index.html
+├── Pages
+│   ├── catalogo.html
+│   ├── personalizar.html
+│   ├── nosotros.html
+│   └── contacto.html
+├── Styles
+│   └── Style.css
+├── Scripts
+│   ├── catalog.js
+│   └── search.js
+├── data
+│   └── products.json
+├── package.json
+├── .gitignore
+└── README.md
 ```
 
-## Instrucciones de Configuración
-1. Clona el repositorio en tu máquina local.
-2. Navega a la carpeta del proyecto.
-3. Abre el archivo `index.html` en un navegador para ver la página principal.
-4. Asegúrate de que todos los archivos CSS y HTML estén correctamente enlazados para mantener la consistencia en el diseño.
+## Features
+- **Product Catalog**: Displays a variety of sublimation products.
+- **Search Functionality**: Users can filter products by name or tags.
+- **Dynamic Loading**: Products are loaded from a JSON file, allowing for easy updates and management.
+- **Customization Options**: Users can personalize products through the customization page.
+- **Company Information**: Provides details about the company, its mission, and values.
 
-## Contribuciones
-Las contribuciones son bienvenidas. Si deseas contribuir, por favor abre un issue o envía un pull request.
+## Setup Instructions
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Open `index.html` in your web browser to view the application.
+4. Ensure you have a local server running if you want to test dynamic features.
 
-## Licencia
-Este proyecto está bajo la Licencia MIT.
+## Usage
+- Use the search bar on the catalog page to find specific products.
+- Click on the product items to view more details or customization options.
+- Explore other pages to learn more about the company and contact information.
+
+## License
+This project is licensed under the MIT License.

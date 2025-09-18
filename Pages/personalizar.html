@@ -22,8 +22,25 @@
 
   <main>
     <h2>Personaliza tu Producto</h2>
-    <p>Aquí puedes personalizar los productos que ofrecemos. Elige tus opciones y crea algo único.</p>
-    <!-- Aquí puedes agregar más contenido relacionado con la personalización -->
+    <p>Selecciona un producto y personalízalo a tu gusto.</p>
+
+    <form id="customization-form">
+      <label for="product-type">Tipo de Producto:</label>
+      <select id="product-type" name="product-type">
+        <option value="mug">Taza</option>
+        <option value="shirt">Camisa</option>
+        <option value="thermos">Termo</option>
+        <option value="jewelry">Joyería</option>
+      </select>
+
+      <label for="custom-text">Texto Personalizado:</label>
+      <input type="text" id="custom-text" name="custom-text" placeholder="Ingresa tu texto aquí">
+
+      <label for="image-upload">Sube tu Imagen:</label>
+      <input type="file" id="image-upload" name="image-upload" accept="image/*">
+
+      <button type="submit">Personalizar</button>
+    </form>
   </main>
   
   <footer>

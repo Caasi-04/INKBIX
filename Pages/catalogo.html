@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo - InkBIX</title>
   <link rel="stylesheet" href="../Styles/Style.css">
+  <script src="../Scripts/catalog.js" defer></script>
+  <script src="../Scripts/search.js" defer></script>
 </head>
 <body>
 
@@ -23,7 +25,9 @@
   <main>
     <h2>Catálogo de Productos</h2>
     <p>Aquí puedes explorar todos nuestros productos disponibles para sublimación.</p>
-
+    
+    <input type="text" id="search-bar" placeholder="Buscar productos..." aria-label="Buscar productos">
+    
     <div id="products-grid" class="products-grid" aria-live="polite">
       <!-- Productos cargados dinámicamente -->
     </div>
@@ -32,72 +36,6 @@
   <footer>
     <p>&copy; 2025 SublimArte - Todos los derechos reservados</p>
   </footer>
-
-  <script>
-    (function () {
-      const grid = document.getElementById('products-grid');
-
-      function escapeHtml(text) {
-        if (text === undefined || text === null) return '';
-        return String(text)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function createCard(p) {
-        const div = document.createElement('article');
-        div.className = 'product-card';
-        // placeholder relativo a la ubicación de la página
-        const placeholder = new URL('../images/placeholder.png', window.location.href).href;
-        const imgSrc = (p.images && p.images[0]) ? p.images[0] : placeholder;
-        div.innerHTML = `
-          <img class="product-image" src="${imgSrc}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.src='${placeholder}'">
-          <div class="product-body">
-            <h3 class="product-name">${escapeHtml(p.name)}</h3>
-            <p class="product-sku">${escapeHtml(p.sku || p.id || '')}</p>
-            <p class="product-price">${escapeHtml(p.currency || '')} ${escapeHtml(p.price != null ? p.price : '')}</p>
-            <p class="product-desc">${escapeHtml(p.description || '')}</p>
-            <div class="product-actions">
-              <button class="btn-primary">Personalizar</button>
-              <button class="btn-secondary">Ver detalles</button>
-            </div>
-          </div>
-        `;
-        return div;
-      }
-
-      function renderProducts(list) {
-        grid.innerHTML = '';
-        if (!Array.isArray(list) || list.length === 0) {
-          grid.innerHTML = '<p>No hay productos disponibles.</p>';
-          return;
-        }
-        list.forEach(p => grid.appendChild(createCard(p)));
-      }
-
-      async function loadProducts() {
-        // construye la URL absoluta desde la ubicación actual (evita problemas con rutas relativas/confusas)
-        const jsonUrl = new URL('../data/products.json', window.location.href).href;
-        console.log('Intentando cargar:', jsonUrl, 'desde', window.location.href);
-        try {
-          const res = await fetch(jsonUrl);
-          console.log('Fetch status:', res.status, 'ok:', res.ok);
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          const json = await res.json();
-          // algunos JSON usan directamente un arreglo; soportamos ambos casos
-          renderProducts(json.products || json || []);
-        } catch (err) {
-          console.error('Error cargando productos:', err);
-          grid.innerHTML = `<p class="error">Error cargando catálogo. URL: ${escapeHtml(jsonUrl)} — ${escapeHtml(err.message)}</p>`;
-        }
-      }
-
-      loadProducts();
-    })();
-  </script>
 
 </body>
 </html>

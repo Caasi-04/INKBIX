@@ -1,22 +1,22 @@
 {
-  "name": "inkbix",
+  "name": "inkbix-catalog",
   "version": "1.0.0",
-  "description": "Website for InkBIX sublimation services",
+  "description": "A catalog webpage for a sublimation company displaying products like mugs, shirts, thermoses, and jewelry.",
   "main": "index.html",
   "scripts": {
     "start": "live-server",
-    "build": "echo 'No build process defined'",
-    "deploy": "vercel --prod"
+    "build": "echo 'Build step not defined yet.'"
   },
-  "keywords": [
-    "sublimation",
-    "inkbix",
-    "website"
-  ],
   "author": "Your Name",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "live-server": "^1.2.1"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "sublimation",
+    "catalog",
+    "products",
+    "ecommerce"
+  ]
 }
