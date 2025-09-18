@@ -1,53 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo - InkBIX</title>
-  <link rel="stylesheet" href="../Styles/catalog.css" />
-  <link rel="stylesheet" href="../Styles/Style.css" />
+  <link rel="stylesheet" href="../Styles/Style.css">
 </head>
 <body>
+
   <header>
     <h1>InkBIX</h1>
-    <p>Catálogo</p>
+    <p>Contacto</p>
   </header>
-
   <nav>
-    <a href="/index.html">Inicio</a>
-    <a href="/Pages/catalogo.html" class="activo">Catálogo</a>
+    <a href="/index.html" class="activo">Inicio</a>
+    <a href="/Pages/catalogo.html">Catálogo</a>
     <a href="/Pages/personalizar.html">Personaliza</a>
     <a href="/Pages/nosotros.html">Sobre Nosotros</a>
     <a href="/Pages/contacto.html">Contacto</a>
   </nav>
 
-  <main class="container">
-    <section class="controls">
-      <input id="search" type="search" placeholder="Buscar productos..." />
-      <select id="sort">
-        <option value="relevance">Relevancia</option>
-        <option value="price-asc">Precio: bajo a alto</option>
-        <option value="price-desc">Precio: alto a bajo</option>
-      </select>
-    </section>
-
-    <section id="product-grid" class="product-grid" aria-live="polite">
-      <!-- Productos renderizados por JS -->
-    </section>
+  <main>
+    <h2>Catálogo de Productos</h2>
+    <p>Aquí puedes explorar todos nuestros productos disponibles para sublimación.</p>
+    <!-- Aquí puedes agregar más contenido relacionado con el catálogo -->
   </main>
-
-  <!-- Modal detalle -->
-  <div id="product-modal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <button id="modal-close" class="modal-close" aria-label="Cerrar">&times;</button>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
+  
   <footer>
     <p>&copy; 2025 SublimArte - Todos los derechos reservados</p>
   </footer>
 
-  <script src="../Scripts/catalog.js"></script>
 </body>
 </html>
