@@ -15,13 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const fragment = document.createDocumentFragment();
 
-    const placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
-      '<rect fill="#eee" width="100%" height="100%"/>' +
-      '<text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#999" dy=".3em">Sin imagen</text>' +
-      '</svg>'
-    );
-
     products.forEach(p => {
       const card = document.createElement('article');
       card.className = 'product-card';
@@ -29,11 +22,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const img = document.createElement('img');
       img.className = 'product-image';
       img.alt = p.name || 'Producto';
-      img.src = p.image || placeholder;
-      img.onerror = () => {
-        img.onerror = null;
-        img.src = placeholder;
-      };
+
+      // Nuevo: intentar varias rutas antes de fallback
+      (function setImageWithFallback(imgEl, src) {
+        const placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
+          '<rect fill="#eee" width="100%" height="100%"/>' +
+          '<text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#999" dy=".3em">Sin imagen</text>' +
+          '</svg>'
+        );
+
+        if (!src) {
+          imgEl.src = placeholder;
+          return;
+        }
+
+        const candidates = [
+          src,
+          src.replace(/^\.?\//, ''),           // sin ./ o /
+          '../' + src.replace(/^\.?\//, ''),   // relativa desde Pages
+          '/'+ src.replace(/^\.?\//, ''),      // desde raíz
+          'data/' + src.replace(/^\.?\//, ''), // posible carpeta data
+          'Images/' + src.replace(/^\.?\//, ''),// posible carpeta Images
+        ].filter((v, i, a) => v && a.indexOf(v) === i);
+
+        let idx = 0;
+        function tryNext() {
+          if (idx >= candidates.length) {
+            imgEl.src = placeholder;
+            return;
+          }
+          imgEl.onerror = () => {
+            idx++;
+            tryNext();
+          };
+          imgEl.onload = () => {
+            imgEl.onerror = null;
+          };
+          imgEl.src = candidates[idx];
+        }
+        tryNext();
+      })(img, p.image);
 
       const name = document.createElement('h3');
       name.className = 'product-name';
