@@ -1,58 +1,66 @@
 [
   {
-    "name": "Mug Personalizado",
-    "type": "mug",
-    "tags": ["cerámica", "personalizado", "regalo"],
-    "image": "images/mug-personalizado.jpg",
-    "price": 12.99
+    "id": "p001",
+    "name": "Taza Clásica Blanca",
+    "tags": ["taza","mug","ceramica"],
+    "price": 6.50,
+    "image": "https://via.placeholder.com/300x300?text=Taza+Blanca",
+    "description": "Taza de cerámica 330ml perfecta para sublimación."
   },
   {
-    "name": "Camiseta Sublimada",
-    "type": "shirt",
-    "tags": ["algodón", "moda", "personalizado"],
-    "image": "images/camiseta-sublimada.jpg",
-    "price": 19.99
+    "id": "p002",
+    "name": "Taza Jarra Grande",
+    "tags": ["taza","jarra","mug"],
+    "price": 9.00,
+    "image": "https://via.placeholder.com/300x300?text=Jarra",
+    "description": "Jarra grande tipo mug, ideal para diseños grandes."
   },
   {
-    "name": "Termo de Acero Inoxidable",
-    "type": "thermos",
-    "tags": ["acero", "caliente", "frío"],
-    "image": "images/termo-acero.jpg",
-    "price": 24.99
+    "id": "p003",
+    "name": "Camiseta Algodón Unisex",
+    "tags": ["camisa","camiseta","ropa"],
+    "price": 12.00,
+    "image": "https://via.placeholder.com/300x300?text=Camiseta",
+    "description": "Camiseta 100% algodón lista para sublimación."
   },
   {
-    "name": "Collar Personalizado",
-    "type": "jewelry",
-    "tags": ["joyería", "personalizado", "accesorio"],
-    "image": "images/collar-personalizado.jpg",
-    "price": 15.99
+    "id": "p004",
+    "name": "Termo Acero 500ml",
+    "tags": ["termo","botella","acero"],
+    "price": 15.00,
+    "image": "https://via.placeholder.com/300x300?text=Termo",
+    "description": "Termo de acero inoxidable, mantiene temperatura."
   },
   {
-    "name": "Taza de Café",
-    "type": "mug",
-    "tags": ["cerámica", "café", "regalo"],
-    "image": "images/taza-cafe.jpg",
-    "price": 10.99
+    "id": "p005",
+    "name": "Set de Bisutería Sublimable",
+    "tags": ["bisuteria","accesorios","joyeria"],
+    "price": 8.50,
+    "image": "https://via.placeholder.com/300x300?text=Bisutería",
+    "description": "Colgantes y pulseras listas para sublimar."
   },
   {
-    "name": "Sudadera con Capucha",
-    "type": "shirt",
-    "tags": ["abrigo", "moda", "personalizado"],
-    "image": "images/sudadera-capucha.jpg",
-    "price": 29.99
+    "id": "p006",
+    "name": "Llavero Rectangular",
+    "tags": ["llavero","accesorio","bisuteria"],
+    "price": 3.00,
+    "image": "https://via.placeholder.com/300x300?text=Llavero",
+    "description": "Llavero sublimable rectangular en acrílico."
   },
   {
-    "name": "Botella de Agua",
-    "type": "thermos",
-    "tags": ["plástico", "reutilizable", "deporte"],
-    "image": "images/botella-agua.jpg",
-    "price": 14.99
+    "id": "p007",
+    "name": "Caja para Regalo Sublimable",
+    "tags": ["caja","packaging","regalo"],
+    "price": 4.50,
+    "image": "https://via.placeholder.com/300x300?text=Caja",
+    "description": "Caja pequeña para presentar productos sublimados."
   },
   {
-    "name": "Pulsera de Cuero",
-    "type": "jewelry",
-    "tags": ["accesorio", "moda", "personalizado"],
-    "image": "images/pulsera-cuero.jpg",
-    "price": 18.99
+    "id": "p008",
+    "name": "Vaso de Cristal",
+    "tags": ["jarra","vaso","cristal"],
+    "price": 7.25,
+    "image": "https://via.placeholder.com/300x300?text=Vaso+Cristal",
+    "description": "Vaso de cristal para sublimación con recubrimiento."
   }
 ]
