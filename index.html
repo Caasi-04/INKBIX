@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mi Empresa de patos</title>
-  <!-- Enlace al archivo CSS externo -->
   <link rel="stylesheet" href="Styles/Style.css">
-  <link rel="icon" href="/Images/Logos/Logo2.png" type="image/png"> <!-- imagen que aparece en el la pestaña -->
+  <link rel="icon" href="/Images/Logos/Logo2.png" type="image/png">
 </head>
 <body>
-
-  <!-- Header (reutilizable) -->
   <div data-include="components/header.html"></div>
 
   <nav>
-    <a href="/index.html" class="activo">Inicio</a>
-    <a href="/Pages/catalogo.html">Catálogo</a>
-    <a href="/Pages/personalizar.html">Personaliza</a>
-    <a href="/Pages/nosotros.html">Sobre Nosotros</a>
-    <a href="/Pages/contacto.html">Contacto</a>
+    <a href="index.html">Inicio</a>
+    <a href="Pages/catalogo.html">Catálogo</a>
+    <a href="Pages/personalizar.html">Personaliza</a>
+    <a href="Pages/nosotros.html">Sobre Nosotros</a>
+    <a href="Pages/contacto.html">Contacto</a>
   </nav>
 
-  <!-- Aquí va el contenido principal de la página -->
+  <main class="container">
+    <section class="section hero">
+      <h1>Bienvenido a InkBIX</h1>
+      <p>Impresión personalizada de alta calidad. Explora nuestro catálogo o crea tu propio diseño.</p>
+    </section>
 
-  <!-- Footer (reutilizable) -->
+    <section class="section">
+      <h2>Destacados</h2>
+      <p>Productos destacados y promociones.</p>
+    </section>
+  </main>
+
   <div data-include="components/footer.html"></div>
-
   <script src="scripts/main.js"></script>
 </body>
 </html>
