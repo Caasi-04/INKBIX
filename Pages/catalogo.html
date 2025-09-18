@@ -23,12 +23,76 @@
   <main>
     <h2>Catálogo de Productos</h2>
     <p>Aquí puedes explorar todos nuestros productos disponibles para sublimación.</p>
-    <!-- Aquí puedes agregar más contenido relacionado con el catálogo -->
+
+    <div id="products-grid" class="products-grid" aria-live="polite">
+      <!-- Productos cargados dinámicamente -->
+    </div>
   </main>
   
   <footer>
     <p>&copy; 2025 SublimArte - Todos los derechos reservados</p>
   </footer>
+
+  <script>
+    // Ruta: /data/products.json (ajusta si la colocaste en otra carpeta)
+    async function loadProducts() {
+      try {
+        const res = await fetch('/data/products.json');
+        if (!res.ok) throw new Error('No se pudo cargar products.json');
+        const json = await res.json();
+        renderProducts(json.products || []);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('products-grid').innerHTML =
+          '<p class="error">Error cargando el catálogo. Intenta recargar la página.</p>';
+      }
+    }
+
+    function createCard(p) {
+      const div = document.createElement('article');
+      div.className = 'product-card';
+      const imgSrc = (p.images && p.images[0]) ? p.images[0] : '/images/placeholder.png';
+      div.innerHTML = `
+        <img class="product-image" src="${imgSrc}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.src='/images/placeholder.png'">
+        <div class="product-body">
+          <h3 class="product-name">${escapeHtml(p.name)}</h3>
+          <p class="product-sku">${escapeHtml(p.sku || p.id || '')}</p>
+          <p class="product-price">${escapeHtml(p.currency || '')} ${escapeHtml(p.price != null ? p.price : '')}</p>
+          <p class="product-desc">${escapeHtml(p.description || '')}</p>
+          <div class="product-actions">
+            <button class="btn-primary">Personalizar</button>
+            <button class="btn-secondary">Ver detalles</button>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    function renderProducts(list) {
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = '';
+      if (!Array.isArray(list) || list.length === 0) {
+        grid.innerHTML = '<p>No hay productos disponibles.</p>';
+        return;
+      }
+      // Agrega cada producto
+      list.forEach(p => grid.appendChild(createCard(p)));
+    }
+
+    // Pequeña función para evitar inyección en texto
+    function escapeHtml(text) {
+      if (text === undefined || text === null) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Iniciar carga
+    loadProducts();
+  </script>
 
 </body>
 </html>
