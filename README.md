@@ -1,69 +1,70 @@
-# React + TypeScript + Vite
+# InkBIX Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+InkBIX is a web project designed to provide information about our company, the services we offer, and a platform for our blog. This README file outlines the structure of the project, setup instructions, and usage guidelines.
 
-Currently, two official plugins are available:
+## Project Structure
+The project is organized as follows:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+InkBIX
+├── index.html          # Main entry point of the website
+├── about.html          # Information about the company
+├── services.html       # Details of services offered
+├── blog.html           # Blog section for articles and posts
+├── contact.html        # Contact form and information
+├── 404.html            # Error page for non-existent routes
+├── css
+│   ├── reset.css       # CSS reset for consistent styling
+│   ├── styles.css      # Main styles for the website
+│   └── components
+│       ├── header.css  # Styles for the header component
+│       └── footer.css  # Styles for the footer component
+├── js
+│   ├── main.js         # Main JavaScript for interactivity
+│   ├── analytics.js    # Tracking user interactions
+│   └── vendor
+│       └── polyfills.js # Polyfills for browser compatibility
+├── components
+│   ├── header.html     # HTML structure for the header
+│   ├── footer.html     # HTML structure for the footer
+│   └── hero.html       # HTML structure for the hero section
+├── assets
+│   ├── fonts           # Directory for font files
+│   └── icons           # Directory for icon files
+├── data
+│   └── posts.json      # JSON data for blog posts
+├── package.json        # npm configuration file
+├── .gitignore          # Files and directories to ignore in version control
+└── README.md           # Documentation for the project
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup Instructions
+1. **Clone the Repository**
+   ```
+   git clone <repository-url>
+   cd InkBIX
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. **Install Dependencies**
+   Ensure you have Node.js installed, then run:
+   ```
+   npm install
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Run the Project**
+   You can use a local server to view the project. For example, you can use `live-server`:
+   ```
+   npx live-server
+   ```
+
+## Usage Guidelines
+- Navigate through the website using the provided links in the header.
+- The blog section can be accessed via the blog link, where you can read articles.
+- Use the contact page to reach out for inquiries or support.
+
+## Contributing
+Contributions are welcome! Please submit a pull request or open an issue for any suggestions or improvements.
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
