@@ -14,24 +14,66 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const fragment = document.createDocumentFragment();
+
+    const placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">' +
+      '<rect fill="#eee" width="100%" height="100%"/>' +
+      '<text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#999" dy=".3em">Sin imagen</text>' +
+      '</svg>'
+    );
+
     products.forEach(p => {
       const card = document.createElement('article');
       card.className = 'product-card';
-      card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}" class="product-image" />
-        <h3 class="product-name">${p.name}</h3>
-        <p class="product-price">$${p.price.toFixed(2)}</p>
-        <p class="product-desc">${p.description}</p>
-        <p class="product-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}</p>
-      `;
+
+      const img = document.createElement('img');
+      img.className = 'product-image';
+      img.alt = p.name || 'Producto';
+      img.src = p.image || placeholder;
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = placeholder;
+      };
+
+      const name = document.createElement('h3');
+      name.className = 'product-name';
+      name.textContent = p.name || '';
+
+      const price = document.createElement('p');
+      price.className = 'product-price';
+      price.textContent = (typeof p.price === 'number') ? `$${p.price.toFixed(2)}` : '';
+
+      const desc = document.createElement('p');
+      desc.className = 'product-desc';
+      desc.textContent = p.description || '';
+
+      const tags = document.createElement('p');
+      tags.className = 'product-tags';
+      if (Array.isArray(p.tags)) {
+        tags.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join(' ');
+      }
+
+      card.appendChild(img);
+      card.appendChild(name);
+      card.appendChild(price);
+      card.appendChild(desc);
+      card.appendChild(tags);
+
       fragment.appendChild(card);
     });
     grid.appendChild(fragment);
   };
 
-  // Ruta relativa desde Pages/catalogo.html a data/products.json
-  fetch('../data/products.json')
-    .then(r => r.json())
+  function tryFetch(path) {
+    return fetch(path).then(r => {
+      if (!r.ok) throw new Error('No OK');
+      return r.json();
+    });
+  }
+
+  // intenta cargar desde ruta relativa (Pages -> ../data) y si falla intenta desde raíz (/data)
+  tryFetch('../data/products.json')
+    .catch(() => tryFetch('/data/products.json'))
     .then(data => {
       window.PRODUCTS = data;
       window.renderProducts(window.PRODUCTS);
