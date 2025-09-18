@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Personaliza - InkBIX</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header><div id="header-placeholder"></div></header>
+
+    <main>
+        <section class="personaliza">
+            <h1>Personaliza tu producto</h1>
+            <p>Sube tu imagen, elige el tipo de producto y deja las instrucciones para que lo fabriquemos.</p>
+
+            <form id="personaliza-form" enctype="multipart/form-data">
+                <label>Nombre completo
+                    <input type="text" name="name" required>
+                </label>
+
+                <label>Correo electrónico
+                    <input type="email" name="email" required>
+                </label>
+
+                <label>Producto
+                    <select name="product" required>
+                        <option value="">Selecciona...</option>
+                        <option value="camiseta">Camiseta</option>
+                        <option value="taza">Taza</option>
+                        <option value="termo">Termo</option>
+                        <option value="vaso">Vaso</option>
+                        <option value="bisuteria">Bisutería</option>
+                    </select>
+                </label>
+
+                <label>Subir imagen (PNG/JPG)
+                    <input type="file" name="image" accept="image/png, image/jpeg" required>
+                </label>
+
+                <label>Instrucciones
+                    <textarea name="notes" rows="4" placeholder="Detalla tamaño, colores o ubicación del diseño"></textarea>
+                </label>
+
+                <button type="submit" class="btn">Enviar solicitud</button>
+            </form>
+        </section>
+    </main>
+
+    <footer><div id="footer-placeholder"></div></footer>
+    <script src="/js/main.js"></script>
+    <script>
+        // pequeño manejador demo del formulario
+        document.addEventListener('submit', (e) => {
+            if (e.target.id === 'personaliza-form') {
+                e.preventDefault();
+                alert('Gracias, hemos recibido tu solicitud. Nos pondremos en contacto pronto.');
+                e.target.reset();
+            }
+        });
+    </script>
+</body>
+</html>
