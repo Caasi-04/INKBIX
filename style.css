@@ -21,6 +21,53 @@ h1 {
     margin: 5px 10px;
 }
 
+/* Contenedor del modal */
+#welcomeModal {
+  display: flex; /* inicialmente visible, cambia a none al cerrar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(35, 40, 50, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  overflow-y: auto;   /* scroll vertical */
+  overflow-x: hidden; /* NO scroll horizontal */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Contenido del modal */
+#welcomeModal .modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background-color: #2e3440;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-y: auto;   /* scroll vertical si el contenido es alto */
+  overflow-x: hidden; /* bloquear scroll horizontal */
+  box-sizing: border-box;
+}
+
+/* Botón flotante de cerrar */
+#welcomeModal #closeModalBtn {
+  position: fixed;
+  bottom: 20px;       /* distancia desde el borde inferior */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1300;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #434c5e;
+  color: #eceff4;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
 #config select, #config input {
     padding: 5px;
     border-radius: 5px;
