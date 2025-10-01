@@ -127,17 +127,20 @@ document.addEventListener('click', (e) => {
 patchNotesButton.addEventListener('click', () => {
   patchNotesModal.style.display = 'flex';
   configDropdown.style.display = 'none'; // cerrar dropdown al abrir modal
+  document.body.style.overflow = 'hidden'; // bloquear scroll de fondo
 });
 
 // Cerrar modal al presionar botón
 closePatchNotesBtn.addEventListener('click', () => {
   patchNotesModal.style.display = 'none';
+  document.body.style.overflow = 'auto'; // restaurar scroll de fondo
 });
 
 // Cerrar modal al hacer click fuera del contenido
 patchNotesModal.addEventListener('click', (e) => {
   if (e.target === patchNotesModal) {
     patchNotesModal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // restaurar scroll de fondo
   }
 });
 
