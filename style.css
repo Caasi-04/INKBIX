@@ -50,20 +50,21 @@ h1 {
 #board-container {
   width: 100%;
   height: calc(100vh - 150px);
-  overflow: auto;
+  overflow: auto;              /* permite scroll en móviles */
   -webkit-overflow-scrolling: touch;
-  display: block;          /* 🔹 no usar flex */
-  text-align: center;      /* 🔹 centro horizontal */
+  display: block;              /* no usar flex */
+  text-align: center;          /* centra horizontalmente el board */
 }
 
 #board {
-  display: inline-grid;    /* 🔹 inline para que respete el centrado */
-  margin: auto;            /* 🔹 se centra cuando sobra espacio */
+  display: grid;
+  width: fit-content;          /* solo ocupa el espacio de las celdas */
+  height: fit-content;
+  margin: auto;                /* centra si cabe en el contenedor */
   user-select: none;
   transform-origin: top left;
-  min-width: max-content;
-  min-height: max-content;
 }
+
 
 
 
@@ -584,22 +585,29 @@ body.light-mode #patch-notes-modal #close-patch-notes-btn:hover {
   -webkit-overflow-scrolling: touch;
   touch-action: pinch-zoom pan-x pan-y;
   overscroll-behavior: contain;
-  display: flex;
-  justify-content: center;
-  align-items: start;
+
+  display: block;          /* ⚠️ cambiar de flex a block */
+  text-align: center;      /* centrado horizontal del tablero */
 
   /* Ocultar scrollbar */
   -ms-overflow-style: none;  /* IE y Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
 #board-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-  #board {
-    grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
-    justify-content: start !important;
-    margin-top: 15px;
-  }
+ #board {
+  display: inline-grid;           /* inline para respetar el centrado */
+  grid-template-columns: repeat(var(--board-width), 30px);  /* ancho fijo por celda */
+  grid-template-rows: repeat(var(--board-height), 30px);    /* alto fijo por celda */
+  margin: 15px auto 0 auto;       /* centrado horizontal y margen superior */
+  user-select: none;
+  transform-origin: top left;
+  min-width: max-content;
+  min-height: max-content;
+}
+
 
   .cell {
     width: 25px;
