@@ -47,6 +47,19 @@
         - El mensaje inicial ahora se puede scrollear si es necesario.<br>
         - Se ocultaron las barras de desplazamiento en el mensaje inicial y en el tablero para una apariencia más limpia.<br>
         - Cambio al orden de presentación de las notas de parche.<br>
+        - Se ajustaron los 💡Consejo para que funcionen tanto para dispositivos moviles como para ordenadores.<br>
+        - La ventana inicial de controles y reglas se adaptó para ser util para dispositivos moviles y ordenadores.<br>
+        - Ahora no se puede hacer zoom en dispositivos, pero se aumentó el tamaño del tablero y casillas.<br>
+        - Las dificultad muy fácil, fácil y normal ahora son un poco más complicadas.<br>
+        - Las dificultades Difícil, Extremo e Insano ahora son menos complicadas.<br>
+        - Se optimizaron varias animaciones.<br>
+        - Ahora las banderas 🚩 y el tiempo 🕑 del intento actual no estan a la par.<br>
+        - En dispositivos moviles la sección con la hora, fecha y zona horaria ya no se coloca encima del tiempo🕑.<br>
+        - Se arregló el error que hacia que en dispositivos moviles el tablero se viera cortado.<br>
+        - Se arregló el error que hacia que en dispositivos moviles el tablero no se centrara.<br>
+        - Se arregló el error que hacia que en dispositivos moviles el tablero no se ajustara a la pantalla.<br>
+        - Se arregló el error que hacia que en dispositivos moviles el botón de reintentar no se viera.<br>
+        - Se arregló el error que hacia que en dispositivos moviles mantener mucho tiempo la pantalla presionada contara como 2 pulsaciones largas<br>
       </p>
       <br><br>
       <p>Versión 1.3.3 <br>
@@ -122,7 +135,7 @@
   <button id="retryButton" onclick="retryGame()" style="display:none; margin-top: 10px;">🔁 Volver a intentar</button>
   <!-- Barra de consejos -->
   <div id="tipBar" style="margin-top: 15px; font-style: italic; font-size: 16px; color: #bdb8b7;">
-    Consejo: Para colocar una bandera 🚩, haz clic derecho en una celda.
+    💡Consejo: Para colocar una bandera 🚩, haz clic derecho o manten presionada en una celda.
   </div>
 
   <!-- Ventana modal, oculta al principio -->
@@ -137,8 +150,8 @@
       Reglas:
     </p>
     <ul style="text-align: left;">
-      <li>Al hacer click reveleará una celda</li>
-      <li>El primer click <strong>nunca</strong> es una mina 💣</li>
+      <li>Al hacer clic o presionar una celda la reveleará</li>
+      <li>La primer casilla en presionar <strong>nunca</strong> es una mina 💣</li>
       <li>Aparecerán unos números, este número indica la cantidad de minas 💣 que hay <strong>alrededor</strong></li>
       <li>Las <strong>8 celdas</strong> que rodean cualquier casilla son consideredas <strong>alrededor</strong></li>
       <li>Abrir una celda <strong>con mina 💣</strong> terminara el juego en derrota</li>
