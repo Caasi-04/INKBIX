@@ -375,7 +375,7 @@ body.light-mode #gameStatusBar {
 }
 
 body.light-mode #tipBar {
-    background-color: #dcdcdc;
+    background-color: #f0f0f0;
     color: #2e3440;
 }
 

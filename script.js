@@ -98,6 +98,51 @@ function obtenerTip() {
   return tips[randomIndex];
 }
 
+// Botón de configuración y dropdown
+const configButton = document.getElementById('config-button');
+const configDropdown = document.getElementById('config-dropdown');
+
+// Modal de notas de parche
+const patchNotesButton = document.getElementById('patch-notes-button');
+const patchNotesModal = document.getElementById('patch-notes-modal');
+const closePatchNotesBtn = document.getElementById('close-patch-notes-btn');
+
+// Función para mostrar/ocultar dropdown
+configButton.addEventListener('click', (e) => {
+  e.stopPropagation(); // Evitar que el click cierre inmediatamente
+  const isOpen = configDropdown.style.display === 'flex';
+  configDropdown.style.display = isOpen ? 'none' : 'flex';
+  configButton.setAttribute('aria-expanded', !isOpen);
+});
+
+// Cerrar dropdown al hacer click fuera
+document.addEventListener('click', (e) => {
+  if (!configButton.contains(e.target) && !configDropdown.contains(e.target)) {
+    configDropdown.style.display = 'none';
+    configButton.setAttribute('aria-expanded', false);
+  }
+});
+
+// Abrir modal de notas de parche
+patchNotesButton.addEventListener('click', () => {
+  patchNotesModal.style.display = 'flex';
+  configDropdown.style.display = 'none'; // cerrar dropdown al abrir modal
+});
+
+// Cerrar modal al presionar botón
+closePatchNotesBtn.addEventListener('click', () => {
+  patchNotesModal.style.display = 'none';
+});
+
+// Cerrar modal al hacer click fuera del contenido
+patchNotesModal.addEventListener('click', (e) => {
+  if (e.target === patchNotesModal) {
+    patchNotesModal.style.display = 'none';
+  }
+});
+
+
+
 
 function startGame() {
     let width, height;
@@ -369,6 +414,7 @@ function resetTimer() {
 }
 
 function retryGame() {
+    document.getElementById('retryButton').style.display = 'none'; // ocultar botón
     startGame(); // reinicia el juego con los mismos parámetros
 }
 
